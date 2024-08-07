@@ -5,10 +5,13 @@ import com.example.ca4u.domain.category.Category;
 import com.example.ca4u.domain.guild.Guild;
 import com.example.ca4u.domain.hashtag.Hashtag;
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
+@Entity
 public class GuildHashtag extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "guild_hashtag_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

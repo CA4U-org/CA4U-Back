@@ -1,10 +1,17 @@
 package com.example.ca4u.domain.guild;
 
+import com.example.ca4u.domain.article.Article;
 import com.example.ca4u.domain.base.BaseEntity;
 import com.example.ca4u.domain.category.Category;
+import com.example.ca4u.domain.guild.guildThumbnail.GuildThumbnail;
+import com.example.ca4u.domain.guildHashtag.GuildHashtag;
+import com.example.ca4u.domain.hashtag.Hashtag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -18,36 +25,48 @@ public class Guild extends BaseEntity {
     private Category category;
 
     @Column
-    private String recruit_desc;
+    private String recruitDesc;
 
     @Column
-    private String guild_nm;
+    private String guildNm;
 
     @Column
-    private String guild_brief_desc;
+    private String guildBriefDesc;
 
     @Column
-    private String target_people_desc;
+    private String targetPeopleDesc;
 
     @Column
-    private String apply_desc;
+    private String targetCycleDesc;
 
     @Column
-    private String act_day_desc;
+    private String applyDesc;
 
     @Column
-    private String location_desc;
+    private String actDayDesc;
+
+    @Column
+    private String locationDesc;
 
     @ColumnDefault("0")
     @Column
-    private Integer guild_num;
+    private Integer guildNum;
 
     @Column
-    private String cost_desc;
+    private String costDesc;
 
     @Column
-    private String spec_desc;
+    private String specDesc;
 
     @Column
-    private String logo_img_url;
+    private String logoImgUrl;
+
+    @OneToMany(mappedBy = "guild")
+    private List<GuildHashtag> guildHashtagList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "guild")
+    private List<GuildThumbnail> guildThumbnailList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "guild")
+    private List<Article> articleList = new ArrayList<>();
 }

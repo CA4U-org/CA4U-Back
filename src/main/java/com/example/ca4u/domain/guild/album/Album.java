@@ -2,6 +2,7 @@ package com.example.ca4u.domain.guild.album;
 
 import com.example.ca4u.domain.base.BaseEntity;
 import com.example.ca4u.domain.guild.Guild;
+import com.example.ca4u.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -17,4 +18,8 @@ public class Album extends BaseEntity {
     private Guild guild;
 
     private String albumNm;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
