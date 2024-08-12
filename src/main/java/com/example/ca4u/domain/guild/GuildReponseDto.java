@@ -38,24 +38,24 @@ public class GuildReponseDto {
 
     public static GuildReponseDto of(Guild guild,
                                      List<GuildThumbnail> guildThumbnails,
-                                     List<Hashtag> Hashtags,
+                                     List<Hashtag> hashtags,
                                      Article article,
                                      Boolean likeParam,
                                      Boolean certParam){
 
         return GuildReponseDto.builder()
                 .guildId(guild.getId())
-                /*.thumbImgUrl(guildThumbnails.stream()
+                .thumbImgUrl(guildThumbnails.stream()
                         .map(GuildThumbnail::getImgUrl)
-                        .toList())*/
+                        .toList())
                 .logoImgUrl(guild.getLogoImgUrl())
                 .like(likeParam)
                 .cert(certParam)
                 .guildNm(guild.getGuildNm())
                 .guildBriefDesc(guild.getGuildBriefDesc())
-                /*.hashtags(guildHashtags. stream()
-                        .map(hashtag -> Map.entry(hashtag.get, hashtag.getImageUrl()))
-                        .toList())*/
+                .hashtags(hashtags.stream()
+                        .map(hashtag -> Map.entry(hashtag.getHashtagNm(), hashtag.getImgUrl()))
+                        .toList())
                 .targetPeopleDesc(guild.getTargetPeopleDesc())
                 .targetCycleDesc(guild.getTargetCycleDesc())
                 .applyDesc(guild.getApplyDesc())
@@ -68,7 +68,5 @@ public class GuildReponseDto {
                 .specDesc(guild.getSpecDesc())
                 .recruitDesc(guild.getRecruitDesc())
                 .build();
-
-                //위에 주석 손보기 parameters
     }
 }

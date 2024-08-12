@@ -1,11 +1,15 @@
 package com.example.ca4u.domain.article;
 
+import com.example.ca4u.domain.article.articlePhoto.ArticlePhoto;
 import com.example.ca4u.domain.base.BaseEntity;
 import com.example.ca4u.domain.category.Category;
 import com.example.ca4u.domain.guild.Guild;
 import com.example.ca4u.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -33,4 +37,7 @@ public class Article extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "article")
+    private List<ArticlePhoto> articlePhotoList = new ArrayList<>();
 }
