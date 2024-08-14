@@ -13,7 +13,7 @@ public class HashtagDto {
     public static HashtagDto of(Hashtag hashtag){
         return HashtagDto.builder()
                 .id(hashtag.getId())
-                .hashtagNm(hashtag.getTag())
+                .hashtagNm(hashtag.getHashtagNm())
                 .build();
     }
 }
