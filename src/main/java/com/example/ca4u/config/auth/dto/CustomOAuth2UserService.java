@@ -1,10 +1,11 @@
-package com.example.ca4u.domain.member;
+package com.example.ca4u.config.auth.dto;
 
-import com.example.ca4u.config.auth.OAuthAttributes;
+import com.example.ca4u.config.auth.dto.OAuthAttributes;
 import com.example.ca4u.config.auth.SessionMember;
+import com.example.ca4u.domain.member.Member;
+import com.example.ca4u.domain.member.MemberRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

@@ -1,6 +1,6 @@
 package com.example.ca4u.config;
 
-import com.example.ca4u.domain.member.CustomOAuth2UserService;
+import com.example.ca4u.config.auth.dto.CustomOAuth2UserService;
 import com.example.ca4u.domain.member.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

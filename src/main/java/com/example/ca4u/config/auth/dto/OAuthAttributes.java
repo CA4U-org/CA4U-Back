@@ -1,4 +1,4 @@
-package com.example.ca4u.config.auth;
+package com.example.ca4u.config.auth.dto;
 
 import com.example.ca4u.domain.member.Member;
 import com.example.ca4u.domain.member.Role;

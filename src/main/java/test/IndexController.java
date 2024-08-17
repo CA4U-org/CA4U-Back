@@ -1,6 +1,8 @@
 package test;
 
 
+import com.example.ca4u.config.auth.SessionMember;
+import com.example.ca4u.config.auth.dto.LoginUser;
 import com.example.ca4u.domain.guild.GuildService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,9 +23,12 @@ public class IndexController {
     }*/
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionMember member) {
         model.addAttribute("posts", guildService.getGuildArticles(1));
 
+        if (member != null) {
+            model.addAttribute("userName", member.getName());
+        }
         return "index";
     }
 }
