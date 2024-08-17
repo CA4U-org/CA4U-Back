@@ -3,6 +3,8 @@ package com.example.ca4u.domain.guild;
 import com.example.ca4u.domain.article.Article;
 import com.example.ca4u.domain.article.ArticleRepository;
 import com.example.ca4u.domain.article.dto.ArticleResponseDto;
+import com.example.ca4u.domain.guild.album.Album;
+import com.example.ca4u.domain.guild.album.AlbumDto;
 import com.example.ca4u.domain.guild.guildThumbnail.GuildThumbnail;
 import com.example.ca4u.domain.guildHashtag.GuildHashtag;
 import com.example.ca4u.domain.hashtag.Hashtag;
@@ -45,5 +47,11 @@ public class GuildService {
     public ArticleResponseDto getGuildArticle(long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(() -> new EntityNotFoundException("해당 게시글이 없습니다. id=" + articleId));
         return ArticleResponseDto.of(article);
+    }
+
+    //특정 길드의 앨범 리스트 정보를 return 하는 메서드
+    public List<AlbumDto> getGuildAlbums(long guildId) {
+        List<Album> albumList = guildRepository.findById(guildId).orElseThrow(() -> new EntityNotFoundException("해당 길드가 없습니다. id=" + guildId)).getAlbumList();
+        return albumList.stream().map(AlbumDto::of).toList();
     }
 }

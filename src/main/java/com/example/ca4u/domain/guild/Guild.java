@@ -3,6 +3,7 @@ package com.example.ca4u.domain.guild;
 import com.example.ca4u.domain.article.Article;
 import com.example.ca4u.domain.base.BaseEntity;
 import com.example.ca4u.domain.category.Category;
+import com.example.ca4u.domain.guild.album.Album;
 import com.example.ca4u.domain.guild.guildThumbnail.GuildThumbnail;
 import com.example.ca4u.domain.guildHashtag.GuildHashtag;
 import com.example.ca4u.domain.hashtag.Hashtag;
@@ -69,4 +70,7 @@ public class Guild extends BaseEntity {
 
     @OneToMany(mappedBy = "guild")
     private List<Article> articleList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "guild")
+    private List<Album> albumList = new ArrayList<>();
 }
