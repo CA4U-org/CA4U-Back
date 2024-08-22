@@ -12,11 +12,15 @@ import lombok.NoArgsConstructor;
 public class CategoryDto {
     private Long id;
     private String categoryNm;
+    private String categoryDesc;
+    private String imgUrl;
 
     public static CategoryDto of(Category category) {
         return CategoryDto.builder()
                 .id(category.getId())
                 .categoryNm(category.getCategoryNm())
+                .categoryDesc(category.getCategoryDesc())
+                .imgUrl(category.getImgUrl())
                 .build();
     }
 }

@@ -9,11 +9,13 @@ import lombok.Getter;
 public class HashtagDto {
     private Long id;
     private String hashtagNm;
+    private String imgUrl;
 
     public static HashtagDto of(Hashtag hashtag){
         return HashtagDto.builder()
                 .id(hashtag.getId())
                 .hashtagNm(hashtag.getHashtagNm())
+                .imgUrl(hashtag.getImgUrl())
                 .build();
     }
 }

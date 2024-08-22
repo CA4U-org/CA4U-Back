@@ -1,5 +1,7 @@
 package com.example.ca4u.domain.category;
 
+import com.example.ca4u.domain.guild.Guild;
+import com.example.ca4u.domain.hashtag.Hashtag;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -15,61 +17,21 @@ import java.util.List;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    public List<CategoryDto> getFirstCategories() {
-        List<Category> fstCategoryList = categoryRepository.findOnlyFstCategories();
-        List<CategoryDto> fstCategoryDtoList = fstCategoryList.stream()
-                .map(CategoryDto::of)
-                .toList();
-        return fstCategoryDtoList;
+
+    //소속 카테고리 3가지 목록 조회
+    public List<CategoryDto> getCategoryBelongs() {
+        List<Category> categoryList = categoryRepository.findTopCategories();  //type을 B로
+        return categoryList.stream().map(CategoryDto::of).toList();
     }
 
-    public List<CategoryDto> getSecondCategories(Long fstCategoryId) {
-        List<Category> categoryList = categoryRepository.findAllSecCategoryByFstId(fstCategoryId);
-
-        List<CategoryDto> categoryDtoList = categoryList.stream()
-                .map(CategoryDto::of)
-                .toList();
-        return categoryDtoList;
+    //카테고리별로 보기 6가지 목록 조회
+    public List<CategoryDto> getCategories() {
+        List<Category> categoryList = categoryRepository.findCategories();  //type을 C로
+        return categoryList.stream().map(CategoryDto::of).toList();
     }
 
-    public List<CategoryFilterResponseDto> getAllFiltersCategory(String type){
-        //변수 리스트 선언
-        List<CategoryFilterResponseDto> categoryFilterResponseDtos = new LinkedList<>();
+    //카테고리에 포함된 길드 목록들 조회
+/*    public List<CategoryGuildResponseDto> getCategoryGuilds(long categoryId) {
 
-        //대분류 다 불러오기
-        List<CategoryDto> categoryDtos = categoryRepository.findOnlyFstCategories().stream().map(CategoryDto::of).toList();
-        
-        //대분류 이름 담으면서 대분류에 해당하는 중분류 불러와서 담기
-        for(CategoryDto categoryDto : categoryDtos){
-
-            //카테고리 필터 선언(대분류 개수만큼 필요함)
-            CategoryFilterResponseDto categoryFilterResponseDto = new CategoryFilterResponseDto();
-
-            String categoryNm = categoryDto.getCategoryNm();
-
-            //학회는 관심분과 넣지않음.
-            if(type != null && type.equals("A") && categoryNm.equals("관심분과")){
-                continue;
-            }
-
-            //카테고리 대분류 집어넣기
-            categoryFilterResponseDto.setFstCategoryFilter(categoryNm);
-
-            //카테고리 대분류ID에 따른 중분류 불러오기
-            List<CategoryDto> secCategoryList = categoryRepository.findAllSecCategoryByFstId(categoryDto.getId()).stream().map(CategoryDto::of).toList();
-
-            //동아리에 학술탐구분과 추가된 게 있어서 요건 주석
-//            if(type != null && type.equals("C") && categoryNm.equals("관심분과")){
-//                secCategoryList = secCategoryList.stream().filter(s -> !s.getCategoryNm().equals("학술탐구분과")).toList();
-//            }
-
-            //카테고리 중분류 집어넣기 (List<CategoryDto>형)
-            categoryFilterResponseDto.setSecCategoryFilter(secCategoryList);
-
-            categoryFilterResponseDtos.add(categoryFilterResponseDto);
-        }
-
-        return categoryFilterResponseDtos;
-    }
-
+    }*/
 }

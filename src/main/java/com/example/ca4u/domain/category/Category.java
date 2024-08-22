@@ -21,5 +21,7 @@ public class Category extends BaseEntity {
     //카테고리 타입 - (게시글을 보여주기 vs 카테고리들 다시 보여주기) 카테고리 안에 카테고리..
     private String categoryType;
 
+    private String categoryDesc;
+
     private String imgUrl;
 }

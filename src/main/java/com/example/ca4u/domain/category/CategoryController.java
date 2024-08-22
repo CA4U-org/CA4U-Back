@@ -13,20 +13,27 @@ import java.util.List;
 @Tag(name = "카테고리", description = "카테고리 API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class CategoryController {
     private final CategoryService categoryService;
-    @Operation(summary = "중분류 목록 조회", description = "대분류 아이디에 해당하는 중분류 목록 조회 API", parameters = {
-            @Parameter(name = "fstCategoryId", description = "대분류 아이디", in = ParameterIn.PATH, required = true)
-    })
-    @GetMapping("/{fstCategoryId}/second-categories")
-    public ApiResponse<List<CategoryDto>> getSecondCategories(@PathVariable Long fstCategoryId) {
-        return ApiResponse.ok(categoryService.getSecondCategories(fstCategoryId), "대분류에 따른 중분류 목록 조회 성공");
+
+    @Operation(summary = "소속별로 보기", description = "소속별로 보기에 있는 3가지 카테고리 목록을 조회합니다.")
+    @GetMapping("/belongs")
+    public ApiResponse<List<CategoryDto>> getBelongs() {
+        return ApiResponse.ok(categoryService.getCategoryBelongs(), "소속별로 보기 목록 조회 성공");
     }
 
-    @Operation(summary = "대분류 목록 조회", description = "대분류 목록 조회 API")
-    @GetMapping("/first-categories")
-    public ApiResponse<List<CategoryDto>> getFirstCategories() {
-        return ApiResponse.ok(categoryService.getFirstCategories(), "대분류 목록 조회 성공");
+    @Operation(summary = "카테고리별로 보기", description = "카테고리별로 보기에 있는 6가지 카테고리 목록을 조회합니다.")
+    @GetMapping("/categories")
+    public ApiResponse<List<CategoryDto>> getCategories() {
+        return ApiResponse.ok(categoryService.getCategories(), "카테고리별로 보기 목록 조회 성공");
+    }
+    
+    //카테고리의 카테고리 보기
+    @Operation(summary = "카테고리의 길드보기", description = "카테고리에 포함되어있는 동아리 or 학회 목록을 조회합니다.")
+    @GetMapping("/categories/{categoryId}/guilds")
+    public ApiResponse<List<CategoryGuildResponseDto>> getCategoryGuilds(@PathVariable long categoryId) {
+       /* return ApiResponse.ok(categoryService.getCategoryGuilds(categoryId), "카테고리에 포함된 길드 목록 조회 성공");*/
+        return null;
     }
 }

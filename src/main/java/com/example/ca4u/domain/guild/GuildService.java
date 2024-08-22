@@ -31,7 +31,7 @@ public class GuildService {
         Article article = guild.getArticleList().get(5);
 
         //사용자가 길드를 즐겨찾기 했는지 여부 개발하기 likeParam
-        //사용자가 길드에 소속되어 있는지 여부 개발하기 certParam
+
 
         return GuildReponseDto.of(guild, guildThumbnails, HashtagList, article,true, true);
     }
