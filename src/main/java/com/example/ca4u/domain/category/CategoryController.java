@@ -2,8 +2,6 @@ package com.example.ca4u.domain.category;
 
 import com.example.ca4u.apiResponse.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +28,16 @@ public class CategoryController {
     }
     
     //카테고리의 카테고리 보기
-    @Operation(summary = "카테고리의 길드보기", description = "카테고리에 포함되어있는 동아리 or 학회 목록을 조회합니다.")
+    @Operation(summary = "카테고리의 포함된 길드 불러오기", description = "카테고리에 포함되어있는 동아리 or 학회 목록을 조회합니다.")
     @GetMapping("/categories/{categoryId}/guilds")
     public ApiResponse<List<CategoryGuildResponseDto>> getCategoryGuilds(@PathVariable long categoryId) {
        /* return ApiResponse.ok(categoryService.getCategoryGuilds(categoryId), "카테고리에 포함된 길드 목록 조회 성공");*/
         return null;
+    }
+
+    @Operation(summary = "카테고리의 카테고리들 불러오기", description = "카테고리에 포함되어있는 카테고리 목록을 조회합니다.(단과대 별로 보기)")
+    @GetMapping("/categories/{categoryId}")
+    public ApiResponse<List<CategoryDeptResponseDto>> getCategoryCategories(@PathVariable long categoryId) {
+        return ApiResponse.ok(categoryService.getCategoryById(categoryId), "카테고리에 포함된 카테고리 목록 조회 성공");
     }
 }

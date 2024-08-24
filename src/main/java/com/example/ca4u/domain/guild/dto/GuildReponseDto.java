@@ -1,15 +1,14 @@
-package com.example.ca4u.domain.guild;
+package com.example.ca4u.domain.guild.dto;
 
 import com.example.ca4u.domain.article.Article;
+import com.example.ca4u.domain.guild.Guild;
 import com.example.ca4u.domain.guild.guildThumbnail.GuildThumbnail;
-import com.example.ca4u.domain.guildHashtag.GuildHashtag;
 import com.example.ca4u.domain.hashtag.Hashtag;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)

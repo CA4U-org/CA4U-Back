@@ -3,7 +3,6 @@ package com.example.ca4u.domain.member;
 import com.example.ca4u.apiResponse.ApiResponse;
 import com.example.ca4u.config.auth.SessionMember;
 import com.example.ca4u.config.auth.dto.LoginUser;
-import com.example.ca4u.domain.guild.GuildReponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

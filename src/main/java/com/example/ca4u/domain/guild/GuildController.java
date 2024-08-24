@@ -2,8 +2,11 @@ package com.example.ca4u.domain.guild;
 
 import com.example.ca4u.apiResponse.ApiResponse;
 import com.example.ca4u.domain.article.dto.ArticleResponseDto;
-import com.example.ca4u.domain.guild.album.Album;
 import com.example.ca4u.domain.guild.album.AlbumDto;
+import com.example.ca4u.domain.guild.dto.GuildArticleResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildNoticeResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildRankResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildReponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -52,5 +55,17 @@ public class GuildController {
     })
     public ApiResponse<List<AlbumDto>> getGuildAlbum(@PathVariable long guildId){
         return ApiResponse.ok(guildService.getGuildAlbums(guildId));
+    }
+
+    @Operation(summary = "동아리 랭킹 불러오기", description = "인증회원수가 많은 순서대로 동아리 랭킹 정보를 전달합니다.")
+    @GetMapping("/ranks")
+    public ApiResponse<List<GuildRankResponseDto>> getGuildRanks(){
+        return ApiResponse.ok(guildService.getGuildRanksByCertUser());
+    }
+
+    @Operation(summary = "모집공고 리스트 불러오기", description = "모집공고에 게시될 길드 목록을 전달합니다.")
+    @GetMapping("/notices")
+public ApiResponse<List<GuildNoticeResponseDto>> getGuildNotices(){
+        return ApiResponse.ok(guildService.getGuildNotices());
     }
 }

@@ -1,15 +1,10 @@
 package com.example.ca4u.domain.category;
 
-import com.example.ca4u.domain.guild.Guild;
-import com.example.ca4u.domain.hashtag.Hashtag;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,6 +23,28 @@ public class CategoryService {
     public List<CategoryDto> getCategories() {
         List<Category> categoryList = categoryRepository.findCategories();  //type을 C로
         return categoryList.stream().map(CategoryDto::of).toList();
+    }
+
+    //카테고리에 포함된 카테고리 목록 조회 (개선필요해보임)
+    public List<CategoryDeptResponseDto> getCategoryById(long categoryId) {
+        List<CategoryDeptResponseDto> categoryDeptResponseDtoList = new ArrayList<>();
+
+        //처음에 인문대학, 경영경제대학 등등 조회
+        List<Category> categoryList = categoryRepository.findByParentId(categoryId);
+
+        //해당 대학에 속한 학과들 조회 (인문대학의 경우 -> 국어국문, 영어영문 등등)
+        for (Category category : categoryList) {
+            //DTO 생성
+            CategoryDeptResponseDto categoryDeptResponseDto = new CategoryDeptResponseDto();
+
+            //해당 대학에 속한 sub 카테고리들을 조회
+            List<CategoryDto> subCategoryDtoList = categoryRepository.findByParentId(category.getId()).stream().map(CategoryDto::of).toList();
+
+            //DTO 리스트에 값 넣기 (categoryDeptResponseDto 의 of메소드가 현재 정적메서드가 아님)
+            categoryDeptResponseDtoList.add(categoryDeptResponseDto.of(category.getCategoryNm(), subCategoryDtoList, category.getImgUrl()));
+        }
+
+       return categoryDeptResponseDtoList;
     }
 
     //카테고리에 포함된 길드 목록들 조회

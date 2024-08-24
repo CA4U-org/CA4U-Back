@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
@@ -18,4 +19,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findCategories();
 
 
+    @Query("SELECT c FROM Category c " +
+            "WHERE c.parent.id = :categoryId")
+    List<Category> findByParentId(long categoryId);
 }

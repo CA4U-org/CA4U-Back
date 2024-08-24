@@ -1,4 +1,4 @@
-package com.example.ca4u.domain.guild;
+package com.example.ca4u.domain.guild.dto;
 
 import com.example.ca4u.domain.article.Article;
 import lombok.*;

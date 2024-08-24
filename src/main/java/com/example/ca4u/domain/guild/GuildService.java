@@ -5,6 +5,10 @@ import com.example.ca4u.domain.article.ArticleRepository;
 import com.example.ca4u.domain.article.dto.ArticleResponseDto;
 import com.example.ca4u.domain.guild.album.Album;
 import com.example.ca4u.domain.guild.album.AlbumDto;
+import com.example.ca4u.domain.guild.dto.GuildArticleResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildNoticeResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildRankResponseDto;
+import com.example.ca4u.domain.guild.dto.GuildReponseDto;
 import com.example.ca4u.domain.guild.guildThumbnail.GuildThumbnail;
 import com.example.ca4u.domain.guildHashtag.GuildHashtag;
 import com.example.ca4u.domain.hashtag.Hashtag;
@@ -13,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -53,5 +58,23 @@ public class GuildService {
     public List<AlbumDto> getGuildAlbums(long guildId) {
         List<Album> albumList = guildRepository.findById(guildId).orElseThrow(() -> new EntityNotFoundException("해당 길드가 없습니다. id=" + guildId)).getAlbumList();
         return albumList.stream().map(AlbumDto::of).toList();
+    }
+
+    //인증 회원수를 기준으로 길드 랭킹을 return 하는 메서드
+    public List<GuildRankResponseDto> getGuildRanksByCertUser() {
+        List<Guild> guildList = guildRepository.findTop3GuildOrderByCertUserNum();
+        return guildList.stream().map(GuildRankResponseDto::of).toList();
+    }
+
+    //길드 공지사항 리스트를 return 하는 메서드
+    public List<GuildNoticeResponseDto> getGuildNotices() {
+        //전체 ID 조회 후 랜덤으로 섞기
+        List<Long> allIds = guildRepository.findAllIds();
+        Collections.shuffle(allIds);
+        //랜덤으로 10개만 뽑기
+        List<Long> randomIds = allIds.subList(0, 10);
+        //랜덤으로 뽑은 ID로 길드 조회
+        List<Guild> randomGuilds = guildRepository.findAllById(randomIds);
+        return randomGuilds.stream().map(GuildNoticeResponseDto::of).toList();
     }
 }

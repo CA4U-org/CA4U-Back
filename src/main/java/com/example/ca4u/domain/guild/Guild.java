@@ -26,41 +26,41 @@ public class Guild extends BaseEntity {
     private Category category;
 
     @Column
-    private String recruitDesc;
+    private String recruitDesc; //모집공고글
 
     @Column
-    private String guildNm;
+    private String guildNm;  //길드이름
 
     @Column
-    private String guildBriefDesc;
+    private String guildBriefDesc; //길드간략설명
 
     @Column
-    private String targetPeopleDesc;
+    private String targetPeopleDesc; //선발대상설명
 
     @Column
-    private String targetCycleDesc;
+    private String targetCycleDesc; //선발주기설명
 
     @Column
-    private String applyDesc;
+    private String applyDesc; //지원방법설명
 
     @Column
-    private String actDayDesc;
+    private String actDayDesc; //활동요일설명
 
     @Column
-    private String locationDesc;
+    private String locationDesc; //활동장소_설명 (동아리방 위치 등)
 
     @ColumnDefault("0")
     @Column
-    private Integer guildNum;
+    private Integer guildNum; //인증회원수 (반정규화)
 
     @Column
-    private String costDesc;
+    private String costDesc; //회비설명
 
     @Column
-    private String specDesc;
+    private String specDesc; //길드상세설명(About  길드)
 
     @Column
-    private String logoImgUrl;
+    private String logoImgUrl; //길드로고이미지 주소
 
     @OneToMany(mappedBy = "guild")
     private List<GuildHashtag> guildHashtagList = new ArrayList<>();
