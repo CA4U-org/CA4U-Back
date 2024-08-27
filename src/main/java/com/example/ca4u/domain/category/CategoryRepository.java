@@ -10,16 +10,16 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    @Query("SELECT c FROM Category c " +
+    @Query("SELECT c FROM CATEGORY c " +
             "WHERE c.parent IS NULL And c.categoryType = 'B'")
     List<Category> findTopCategories();
 
-    @Query("SELECT c FROM Category c " +
+    @Query("SELECT c FROM CATEGORY c " +
             "WHERE c.parent IS NULL And c.categoryType = 'C'")
     List<Category> findCategories();
 
 
-    @Query("SELECT c FROM Category c " +
+    @Query("SELECT c FROM CATEGORY c " +
             "WHERE c.parent.id = :categoryId")
     List<Category> findByParentId(long categoryId);
 }

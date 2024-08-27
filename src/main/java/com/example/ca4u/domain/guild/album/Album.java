@@ -11,16 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "ALBUM")
 public class Album extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "album_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "guild_id")
     private Guild guild;
 
+    @Column(name = "album_nm")
     private String albumNm;
 
     @OneToOne(fetch = FetchType.LAZY)

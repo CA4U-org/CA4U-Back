@@ -7,18 +7,19 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "ALBUM_PHOTO")
 public class AlbumPhoto extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "album_photo_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id")
     private Album album;
 
-    private String photoUrl;
+    @Column(name = "img_url")
+    private String imgUrl;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

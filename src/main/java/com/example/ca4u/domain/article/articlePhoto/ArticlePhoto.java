@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "ARTICLE_PHOTO")
 public class ArticlePhoto extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "article_photo_id")
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "img_url")
     private String imgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

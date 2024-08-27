@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "ARTICLE")
 public class Article extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "article_id")
+    @Column(name = "id")
     private Long id;
 
     //홍보글, 일반글

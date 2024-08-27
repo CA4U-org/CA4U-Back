@@ -6,12 +6,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "GUILD_THUMBNAIL")
 public class GuildThumbnail extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "guild_thumbnail_id")
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "img_url")
     private String imgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

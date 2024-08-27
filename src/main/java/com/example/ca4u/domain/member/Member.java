@@ -9,36 +9,37 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
+@Entity(name = "MEMBER")
 public class Member extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "id")
     private Long id;
 
-    private String socialId;
-
     @Enumerated(EnumType.STRING)
+    @Column(name = "social_type")
     private SocialType socialType;
 
-    @Column
-    private String nickname;
-
     //이름
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
+
     //프로필 사진
+    @Column(name = "img_url")
     private String imgUrl;
 
-    @Column
+    @Column(name = "picture")
     private String picture;
 
     // 기본값
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     private Role role;
+
+    @Column(name = "nickname")
+    private String nickname;
 
     @Builder
     public Member(String name, String email, String picture, Role role) {

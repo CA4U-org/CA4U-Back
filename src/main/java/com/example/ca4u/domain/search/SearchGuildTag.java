@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "SEARCH_GUILD_TAG")
 public class SearchGuildTag extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "search_guild_tag_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

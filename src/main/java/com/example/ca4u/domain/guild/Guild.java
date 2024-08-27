@@ -15,51 +15,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "GUILD")
 public class Guild extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "guild_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column
+    @Column(name = "recruit_desc")
     private String recruitDesc; //모집공고글
 
-    @Column
+    @Column(name = "guild_nm")
     private String guildNm;  //길드이름
 
-    @Column
+    @Column(name = "guild_brief_desc")
     private String guildBriefDesc; //길드간략설명
 
-    @Column
+    @Column(name = "target_people_desc")
     private String targetPeopleDesc; //선발대상설명
 
-    @Column
+    @Column(name = "target_cycle_desc")
     private String targetCycleDesc; //선발주기설명
 
-    @Column
+    @Column(name = "apply_desc")
     private String applyDesc; //지원방법설명
 
-    @Column
+    @Column(name = "act_day_desc")
     private String actDayDesc; //활동요일설명
 
-    @Column
+    @Column(name = "location_desc")
     private String locationDesc; //활동장소_설명 (동아리방 위치 등)
 
     @ColumnDefault("0")
-    @Column
+    @Column(name = "guild_num")
     private Integer guildNum; //인증회원수 (반정규화)
 
-    @Column
+    @Column(name = "cost_desc")
     private String costDesc; //회비설명
 
-    @Column
+    @Column(name = "spec_desc")
     private String specDesc; //길드상세설명(About  길드)
 
-    @Column
+    @Column(name = "logo_img_url")
     private String logoImgUrl; //길드로고이미지 주소
 
     @OneToMany(mappedBy = "guild")
@@ -73,4 +73,12 @@ public class Guild extends BaseEntity {
 
     @OneToMany(mappedBy = "guild")
     private List<Album> albumList = new ArrayList<>();
+
+    public void increaseGuildNum() {
+        this.guildNum++;
+    }
+
+    public void decreaseGuildNum() {
+        this.guildNum--;
+    }
 }

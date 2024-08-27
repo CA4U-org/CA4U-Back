@@ -15,7 +15,7 @@ public class AlbumDto {
     public static AlbumDto of(Album album){
         return AlbumDto.builder()
                 .albumNm(album.getAlbumNm())
-                .phtoUrlList(album.getPhotoList().stream().map(albumPhoto -> albumPhoto.getPhotoUrl()).toList())
+                .phtoUrlList(album.getPhotoList().stream().map(albumPhoto -> albumPhoto.getImgUrl()).toList())
                 .build();
     }
 }

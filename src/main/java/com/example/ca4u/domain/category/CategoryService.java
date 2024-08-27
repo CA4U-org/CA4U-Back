@@ -1,5 +1,6 @@
 package com.example.ca4u.domain.category;
 
+import com.example.ca4u.domain.guild.Guild;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +49,12 @@ public class CategoryService {
     }
 
     //카테고리에 포함된 길드 목록들 조회
-/*    public List<CategoryGuildResponseDto> getCategoryGuilds(long categoryId) {
-
-    }*/
+    public CategoryGuildResponseDto getCategoryGuilds(long categoryId) {
+        //카테고리 불러오기
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new IllegalArgumentException("해당 카테고리가 존재하지 않습니다."));
+        //카테고리에 속한 길드리스트 불러오기
+        List<Guild> guildList = category.getGuildList();
+        //DTO로 변환하여 리턴
+        return CategoryGuildResponseDto.of(category, guildList);
+    }
 }

@@ -23,11 +23,11 @@ public class MemberController {
     @Operation(summary = "유저 상세 조회", description = "유저의 마이페이지 정보를 전달합니다.", parameters = {
             @Parameter(name = "member_id", description = "길드아이디", in = ParameterIn.PATH)
     })
-    @GetMapping("/{memberId}")        //이렇게 세션멤버를 가져와서 하는게 맞는지는 모르겠음 (나중에 jwt 토큰으로 바꾸면 어떻게될런지)
-    public ApiResponse<MemberDto> getGuild(@PathVariable long memberId, @LoginUser SessionMember sessionMember){
+    @GetMapping("/")        //이렇게 세션멤버를 가져와서 하는게 맞는지는 모르겠음 (나중에 jwt 토큰으로 바꾸면 어떻게될런지)
+    public ApiResponse<MemberDto> getGuild(@LoginUser SessionMember member){
         //요청한 memberId가 세션에 저장된 memberId와 일치하는지 확인해야함
 
-        return ApiResponse.ok(memberService.getMemberSpec(memberId));
+        return ApiResponse.ok(memberService.getMemberSpec(member.getId()));
     }
 }
 

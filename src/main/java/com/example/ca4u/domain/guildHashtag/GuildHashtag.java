@@ -8,10 +8,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "GUILD_HASHTAG")
 public class GuildHashtag extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "guild_hashtag_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

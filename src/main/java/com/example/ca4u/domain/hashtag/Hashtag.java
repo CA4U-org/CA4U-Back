@@ -5,15 +5,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "HASHTAG")
 public class Hashtag extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hashtag_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "hashtag_nm", nullable = false)
     private String hashtagNm;
 
-    @Column
+    @Column(name = "img_url")
     private String imgUrl;
 }

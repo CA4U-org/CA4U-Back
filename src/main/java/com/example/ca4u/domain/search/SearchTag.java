@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
-@Entity
+@Entity(name = "SEARCH_TAG")
 public class SearchTag extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "search_tag_id")
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "tag_nm")
     private String tagNm;
 }
